@@ -9,3 +9,4 @@
 # OS Settings and Cache 
 .trash/ 
 .DS_Store
+.obsidian/vault-stats.json
