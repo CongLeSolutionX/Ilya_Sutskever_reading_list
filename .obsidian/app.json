@@ -1,0 +1,9 @@
+{
+  "strictLineBreaks": true,
+  "showLineNumber": true,
+  "newFileLocation": "current",
+  "attachmentFolderPath": "./RESOURCES_Attached_Files",
+  "uriCallbacks": true,
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true
+}
