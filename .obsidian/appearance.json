@@ -9,6 +9,9 @@
   "showRibbon": true,
   "baseFontSizeAction": false,
   "enabledCssSnippets": [
-    "vault-logo"
+    "vault-logo",
+    "dim-support-files",
+    "dashboard-ReadLineLength",
+    "dashboard"
   ]
 }
