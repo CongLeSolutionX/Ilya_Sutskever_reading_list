@@ -1,0 +1,51 @@
+# _config.yml (Example Snippet and GitHub Pages Fixed Settings)
+
+# User-configurable settings
+title: My Awesome Site 🌟
+email: your-email@example.com
+description: >- # this means to ignore newlines until "baseurl:"
+  This is a sample description for my new Jekyll site.
+  It's pretty cool!
+baseurl: "/my-repository" # the subpath of your site, e.g. /blog. If hosted at <user>.github.io, this is often ""
+url: "https://username.github.io" # the base hostname & protocol for your site
+theme: minima # Example: using a supported theme
+remote_theme: owner/theme-name # Example: using a theme from GitHub
+
+markdown: kramdown # Markdown processor (kramdown or GFM)
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge # Default and recommended for GitHub Pages
+  math_engine: mathjax # For LaTeX rendering (if kramdown is used)
+  # math_engine_opts:
+  #   script_type: text/x-mathjax-config # Further MathJax config if needed
+
+plugins:
+  - jekyll-feed
+  - jemoji # Example: adding the jemoji plugin
+
+# Folders/files to exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Folders/files to include (that would normally be excluded)
+include:
+  - "_pages" # If you have pages in a folder starting with `_`
+
+# --- GitHub Pages Specific Settings (Cannot be changed) ---
+# lsi: false
+# safe: true
+# source: [your repo's top level directory] # Enforced by GitHub Pages
+# incremental: false
+# highlighter: rouge # Enforced (Pygments is fallback but Rouge is used)
+# gist:
+#   noscript: false
+# kramdown: (specific sub-settings might be fixed or have defaults)
+#   math_engine: mathjax # This is configurable, but rouge is for syntax
+#   syntax_highlighter: rouge # This is fixed
