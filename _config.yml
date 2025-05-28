@@ -9,7 +9,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "https://CongLeSolutionX.github.io/Ilya_Sutskever_reading_list/" # the subpath of your site, e.g. /blog. If hosted at <user>.github.io, this is often ""
 url: "https://CongLeSolutionX.github.io" # the base hostname & protocol for your site
 # theme: minima # Example: using a supported theme
-theme: NrdyBhu1/atlas-jekyll-theme
+theme: cotes2020/jekyll-theme-chirpy
 # remote_theme: CongLeSolutionX/jekyll-theme-chirpy # Example: using a theme from GitHub
 
 markdown: kramdown # Markdown processor (kramdown or GFM)
