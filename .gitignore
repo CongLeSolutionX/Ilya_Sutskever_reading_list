@@ -10,3 +10,5 @@
 .trash/ 
 .DS_Store
 .obsidian/vault-stats.json
+
+.obsidian
