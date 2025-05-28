@@ -6,7 +6,7 @@ email: CongLeJobs@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   This is a sample description for my new Jekyll site.
   It's pretty cool!
-baseurl: "/Ilya_Sutskever_reading_list" # the subpath of your site, e.g. /blog. If hosted at <user>.github.io, this is often ""
+baseurl: "" # the subpath of your site, e.g. /blog. If hosted at <user>.github.io, this is often ""
 url: "https://CongLeSolutionX.github.io" # the base hostname & protocol for your site
 theme: minima # Example: using a supported theme
 remote_theme: CongLeSolutionX/jekyll-theme-chirpy # Example: using a theme from GitHub
