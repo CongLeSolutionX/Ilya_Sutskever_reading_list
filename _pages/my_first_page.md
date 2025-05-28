@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "About Us"
+title: "This is my very first page"
 permalink: /about/
 ---
 
