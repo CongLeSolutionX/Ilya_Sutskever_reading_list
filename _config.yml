@@ -1,51 +1,210 @@
-# _config.yml (Example Snippet and GitHub Pages Fixed Settings)
+# # _config.yml (Example Snippet and GitHub Pages Fixed Settings)
 
-# User-configurable settings
-title: My Awesome Site 🌟
-email: CongLeJobs@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  This is a sample description for my new Jekyll site.
-  It's pretty cool!
-baseurl: "" # the subpath of your site, e.g. /blog. If hosted at <user>.github.io, this is often ""
-url: "https://CongLeSolutionX.github.io/Ilya_Sutskever_reading_list" # the base hostname & protocol for your site
-theme: minima # Example: using a supported theme
-# remote_theme: cotes2020/jekyll-theme-chirpy # Example: using a theme from GitHub
+# # User-configurable settings
+# title: My Awesome Site 🌟
+# email: CongLeJobs@gmail.com
+# description: >- # this means to ignore newlines until "baseurl:"
+#   This is a sample description for my new Jekyll site.
+#   It's pretty cool!
+# baseurl: "" # the subpath of your site, e.g. /blog. If hosted at <user>.github.io, this is often ""
+# url: "https://CongLeSolutionX.github.io/Ilya_Sutskever_reading_list" # the base hostname & protocol for your site
+# theme: minima # Example: using a supported theme
+# # remote_theme: cotes2020/jekyll-theme-chirpy # Example: using a theme from GitHub
 
-markdown: kramdown # Markdown processor (kramdown or GFM)
-kramdown:
-  input: GFM
-  hard_wrap: false
-  syntax_highlighter: rouge # Default and recommended for GitHub Pages
-  math_engine: mathjax # For LaTeX rendering (if kramdown is used)
-  # math_engine_opts:
-  script_type: text/x-mathjax-config # Further MathJax config if needed
+# markdown: kramdown # Markdown processor (kramdown or GFM)
+# kramdown:
+#   input: GFM
+#   hard_wrap: false
+#   syntax_highlighter: rouge # Default and recommended for GitHub Pages
+#   math_engine: mathjax # For LaTeX rendering (if kramdown is used)
+#   # math_engine_opts:
+#   script_type: text/x-mathjax-config # Further MathJax config if needed
 
-plugins:
-  - jekyll-feed
-  - jemoji # Example: adding the jemoji plugin
+# plugins:
+#   - jekyll-feed
+#   - jemoji # Example: adding the jemoji plugin
 
-# Folders/files to exclude from processing
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules/
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
+# # Folders/files to exclude from processing
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
 
-# Folders/files to include (that would normally be excluded)
-include:
-  - "_pages" # If you have pages in a folder starting with `_`
+# # Folders/files to include (that would normally be excluded)
+# include:
+#   - "_pages" # If you have pages in a folder starting with `_`
 
-# --- GitHub Pages Specific Settings (Cannot be changed) ---
-# lsi: false
-# safe: true
-# source: [your repo's top level directory] # Enforced by GitHub Pages
-# incremental: false
-# highlighter: rouge # Enforced (Pygments is fallback but Rouge is used)
-# gist:
-#   noscript: false
-# kramdown: (specific sub-settings might be fixed or have defaults)
-#   math_engine: mathjax # This is configurable, but rouge is for syntax
-#   syntax_highlighter: rouge # This is fixed
+# # --- GitHub Pages Specific Settings (Cannot be changed) ---
+# # lsi: false
+# # safe: true
+# # source: [your repo's top level directory] # Enforced by GitHub Pages
+# # incremental: false
+# # highlighter: rouge # Enforced (Pygments is fallback but Rouge is used)
+# # gist:
+# #   noscript: false
+# # kramdown: (specific sub-settings might be fixed or have defaults)
+# #   math_engine: mathjax # This is configurable, but rouge is for syntax
+# #   syntax_highlighter: rouge # This is fixed
+
+# --- JEKYLL PRODUCTION BUILD SCRIPT (Assumes Gemfile is present) ---
+#
+# This outlines a generic CI/CD pipeline for building and deploying a Jekyll site.
+# Adapt the specifics (caching, artifact commands, deployment methods) to your CI/CD provider.
+
+# === Global Configuration & Default Variables ===
+variables:
+  RUBY_VERSION: '3.1'       # Or your project's Ruby version (e.g., '2.7', '3.0')
+  NODE_VERSION: '18'        # If using Node.js for asset processing (optional)
+  LANG: 'C.UTF-8'           # Ensures consistent encoding
+  LC_ALL: 'C.UTF-8'         # Ensures consistent encoding
+  JEKYLL_ENV: 'production'  # CRITICAL for production builds
+
+# Define paths for caching to speed up subsequent builds
+cache_paths:
+  - 'vendor/bundle'         # Ruby gems installed by Bundler
+  - '.jekyll-cache'         # Jekyll's internal build cache (if using incremental)
+  - 'node_modules'          # Node.js packages (if applicable)
+
+# Define the logical stages of the pipeline
+stages:
+  - setup_dependencies    # Install Ruby, Node (if needed), and all project dependencies
+  - build_site            # Compile the Jekyll site
+  - test_build            # (Optional but Recommended) Run validation tests on the built site
+  - deploy_production     # Deploy the built site to the production server
+
+# === Job Definitions ===
+
+# Job 1: Setup Dependencies
+setup_dependencies_job:
+  stage: setup_dependencies
+  image: ruby:${RUBY_VERSION} # Use an official Ruby image or your custom CI image
+  script:
+    - |
+      echo "🚀 Starting dependency setup (using Gemfile and Gemfile.lock)..."
+      echo "------------------------------------"
+      echo "Ruby version:"
+      ruby -v
+      echo "Gem version:"
+      gem -v
+      echo "Bundler version:"
+      bundle -v || gem install bundler -v '~> 2.3' # Install bundler if not present or specific version
+      bundle -v
+      echo "------------------------------------"
+    - |
+      echo "🔩 Configuring Bundler..."
+      bundle config set --local path 'vendor/bundle'  # Install gems locally to vendor/bundle
+      bundle config set --local without 'development test' # Exclude unneeded groups for prod
+    - |
+      echo "📥 Installing Ruby gems from Gemfile.lock..."
+      bundle install --jobs=$(nproc || echo 4) --retry 3 # Parallel install, retry on failure
+      echo "✅ Gem installation complete."
+    # --- Optional: Node.js setup (if package.json exists) ---
+    # - |
+    #   if [ -f package.json ]; then
+    #     echo "ℹ️ Node.js project detected (package.json found)."
+    #     # Add Node.js installation and npm/yarn install commands here
+    #     echo "✅ Node.js package installation complete."
+    #   else
+    #     echo "ℹ️ No package.json found, skipping Node.js setup."
+    #   fi
+  artifacts: # Make dependencies available if not globally cached
+    paths:
+      - vendor/bundle
+      # - node_modules
+
+# Job 2: Build Jekyll Site for Production
+build_site_job:
+  stage: build_site
+  image: ruby:${RUBY_VERSION}
+  needs: [setup_dependencies_job]
+  variables:
+    JEKYLL_ENV: 'production'
+  script:
+    - |
+      echo "🛠️ Starting Jekyll site build for production..."
+      echo "JEKYLL_ENV is set to: ${JEKYLL_ENV}"
+      echo "------------------------------------"
+    # - | # Optional: Run asset build script if you have one
+    #   if [ -f package.json ] && grep -q "build:assets" package.json; then
+    #     echo "⚙️ Running custom asset build script..."
+    #     npm run build:assets
+    #     echo "✅ Custom asset build complete."
+    #   fi
+    - |
+      echo " Jekyll Build Command Details:"
+      # (Logic for PRODUCTION_CONFIG_FILE_APPEND and INCREMENTAL_BUILD_FLAG as before)
+      PRODUCTION_CONFIG_FILE_APPEND=""
+      if [ -f _config_production.yml ]; then
+        echo "ℹ️ Found _config_production.yml, will append."
+        PRODUCTION_CONFIG_FILE_APPEND=","_config_production.yml
+      fi
+
+      INCREMENTAL_BUILD_FLAG=""
+      if [ "${USE_INCREMENTAL_BUILD}" = "true" ]; then
+        echo "ℹ️ Incremental build enabled by CI variable."
+        INCREMENTAL_BUILD_FLAG="--incremental"
+      fi
+
+      echo "Executing: bundle exec jekyll build --destination ./_site --config _config.yml${PRODUCTION_CONFIG_FILE_APPEND} --strict_front_matter ${INCREMENTAL_BUILD_FLAG}"
+      echo "------------------------------------"
+    - |
+      bundle exec jekyll build \
+        --destination ./_site \
+        --config _config.yml${PRODUCTION_CONFIG_FILE_APPEND} \
+        --strict_front_matter \
+        ${INCREMENTAL_BUILD_FLAG}
+    - |
+      echo "✅ Jekyll site build complete. Output in ./_site directory."
+      echo "------------------------------------"
+      echo "Contents of _site (first level):"
+      ls -alh ./_site
+  artifacts:
+    paths:
+      - _site/
+    expire_in: '7 days'
+
+# Job 3: Test Built Site (Optional but Recommended)
+test_build_job:
+  stage: test_build
+  image: ruby:${RUBY_VERSION}
+  needs: [build_site_job]
+  script:
+    - |
+      echo "🧪 Starting tests on the built site in ./_site..."
+      echo "------------------------------------"
+    # Example: HTMLProofer (ensure 'html-proofer' is in your Gemfile, perhaps in a :test group)
+    - |
+      echo "🔍 Running HTMLProofer..."
+      bundle exec htmlproofer ./_site \
+        --assume-extension \
+        --check-html \
+        # Add other HTMLProofer flags as needed
+        # --disable-external \ # Typically recommended for CI speed
+        --url-ignore "/^http:\/\/localhost/"
+      echo "✅ HTMLProofer checks complete."
+    - |
+      echo "✅ Site testing phase complete."
+
+# Job 4: Deploy to Production Environment
+deploy_production_job:
+  stage: deploy_production
+  # image: your_deployment_tool_image
+  needs: [test_build_job]
+  # only: # Add conditions for when this job should run (e.g., specific branches)
+  #   refs:
+  #     - main
+  script:
+    - |
+      echo "🚢 Starting deployment to production environment..."
+      echo "------------------------------------"
+      echo "Deploying contents of ./_site"
+    - |
+      echo "Placeholder for actual deployment commands."
+      echo "# Refer to previous response for examples (S3, GCS, Netlify, rsync, etc.)"
+      echo "# Ensure SECURE handling of deployment credentials/keys via CI secrets."
+    - |
+      echo "✅ Deployment to production complete! Your site should be live. 🎊"
