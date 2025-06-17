@@ -1,5 +1,9 @@
 ---
-title: Welcome to Quartz 4
+created: 2025-06-13 05:31:26
+author: Cong Le
+version: "1.0"
+license(s): MIT, CC BY-SA 4.0
+copyright: Copyright (c) 2025 Cong Le. All Rights Reserved.
 ---
 
 <div align="center">
@@ -87,7 +91,6 @@ flowchart LR
    Closing_quote ~~~ My_Meme
 
     My_Meme animatingEdge@--> Link_to_my_profile
->>>>>>> main:content/CHANGE_ME.md
   
   animatingEdge@{ animate: true }
 
