@@ -6,7 +6,7 @@ Quartz is a fast, batteries-included static-site generator that transforms Markd
 
 ## 🪴 Get Started
 
-[CLICK_ON_ME_HERE](./CHANGE_ME.md)
+[CLICK_ON_ME_HERE](./CHANGE_ME_in_docs.md)
 
 Quartz requires **at least [Node](https://nodejs.org/) v20** and `npm` v9.3.1 to function correctly. Ensure you have this installed on your machine before continuing.
 
