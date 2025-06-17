@@ -74,7 +74,7 @@ config:
       'primaryColor': '#fc82',
       'primaryTextColor': '#F8B229',
       'primaryBorderColor': '#27AE60',
-      'secondaryColor': '#559129',
+      'secondaryColor': '#5229',
       'secondaryTextColor': '#6C3483',
       'lineColor': '#F8B229',
       'fontSize': '20px'
@@ -82,11 +82,11 @@ config:
   }
 }%%
 flowchart LR
-    My_Meme@{ img: "https://raw.githubusercontent.com/CongLeSolutionX/CongLeSolutionX/refs/heads/main/assets/images/My-meme-and-question-marks-open-book-old-characters-background.png", label: ".....", pos: "b", w: 200, h: 150, constraint: "off" }
+    My_Meme@{ img: "https://raw.githubusercontent.com/CongLeSolutionX/CongLeSolutionX/refs/heads/main/assets/images/My-meme-and-question-marks-open-book-old-characters-background.png", label: "..👀..🤐..📖..", pos: "b", w: 200, h: 150, constraint: "off" }
    
     Link_to_my_profile{{"<a href='https://github.com/CongLeSolutionX' target='_blank'>Click here if you care about my profile</a>"}}
 
-  Closing_quote@{ shape: braces, label: "...."}
+  Closing_quote@{ shape: braces, label: "..👀..🤫..📚.."}
     
    Closing_quote ~~~ My_Meme
     
