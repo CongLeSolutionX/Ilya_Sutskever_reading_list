@@ -1,3 +1,0 @@
-# Ilya_Sutskever_reading_list
-
-Loading...
