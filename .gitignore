@@ -1,12 +1,11 @@
-# Workspace Cache 
-.obsidian/workspace.json 
-.obsidian/workspace-mobile.json 
-
-# Exclude Plugins 
-.obsidian/plugins/* 
-.obsidian/community-plugins.json 
-
-# OS Settings and Cache 
-.trash/ 
 .DS_Store
-.obsidian/vault-stats.json
+.gitignore
+node_modules
+public
+prof
+tsconfig.tsbuildinfo
+.obsidian
+.quartz-cache
+private/
+.replit
+replit.nix
