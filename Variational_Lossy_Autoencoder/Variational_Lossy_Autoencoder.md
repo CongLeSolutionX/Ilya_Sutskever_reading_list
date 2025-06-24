@@ -60,7 +60,7 @@ This paper introduces the **Variational Lossy Autoencoder (VLAE)**, a generative
   - [5. Key Mathematical Formulations 📐](#5-key-mathematical-formulations-)
   - [6. Experiments and Results 📊](#6-experiments-and-results-)
   - [7. Conclusion and Future Work 🚀](#7-conclusion-and-future-work-)
-  - [8. References](#8-references)
+    - [References](#references)
 
 ---
 
@@ -529,17 +529,6 @@ This work provides valuable insights into designing generative models that can l
 
 ---
 
-## 8. References
-
-*   Chen, X., Kingma, D. P., Salimans, T., Duan, Y., Dhariwal, P., Schulman, J., Sutskever, I., & Abbeel, P. (2017). Variational Lossy Autoencoder. *Published as a conference paper at ICLR 2017*. ([arXiv:1611.02731](https://arxiv.org/abs/1611.02731))
-*   Kingma, D. P., & Welling, M. (2013). Auto-Encoding Variational Bayes. *Published as a conference paper at ICLR 2014*. ([arXiv:1312.6114](https://arxiv.org/abs/1312.6114))
-*   Kingma, D. P., Salimans, T., Jozefowicz, R., Chen, X., Sutskever, I., & Welling, M. (2016). Improving Variational Inference with Inverse Autoregressive Flow. *Advances in Neural Information Processing Systems 29 (NIPS 2016)*. ([arXiv:1606.04934](https://arxiv.org/abs/1606.04934))
-*   Van den Oord, A., Kalchbrenner, N., & Kavukcuoglu, K. (2016). Pixel Recurrent Neural Networks. *Proceedings of the 33rd International Conference on Machine Learning (ICML 2016)*. ([arXiv:1601.06759](https://arxiv.org/abs/1601.06759))
-*   Hinton, G. E., & van Camp, D. (1993). Keeping the neural networks simple by minimizing the description length of the weights. *COLT 1993*.
-*   Frey, B. J., & Hinton, G. E. (1997). Variational learning in nonlinear Gaussian belief networks. *Neural Computation*.
-
------
-
 <div align="center">
 	<img alt="Loading…" src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTc3ZG5tY3QybHBoN3RkbXFob2ZsaXV2cnp0NWJ2dXBqMDI2eHY0Mmt6ZyZlcD12MV9pbnRlcm5hbF_naWZfYnlfaWQmY3Q9Zw/TkVpDkJY4E5z2/giphy.gif"/>
 	<br/>
@@ -596,3 +585,14 @@ flowchart LR
 >- **Creative Commons Attribution-ShareAlike 4.0 International**: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) [![CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/) - Legal details in [LICENSE-CC-BY-SA-4.0](THE_PAST/LICENSE-CC-BY-SA-4.0) and at [Creative Commons official site](https://creativecommons.org/licenses/by-sa/4.0/).
 >
 ---
+
+### References
+
+*   Chen, X., Kingma, D. P., Salimans, T., Duan, Y., Dhariwal, P., Schulman, J., Sutskever, I., & Abbeel, P. (2017). Variational Lossy Autoencoder. *Published as a conference paper at ICLR 2017*. ([arXiv:1611.02731](https://arxiv.org/abs/1611.02731))
+*   Kingma, D. P., & Welling, M. (2013). Auto-Encoding Variational Bayes. *Published as a conference paper at ICLR 2014*. ([arXiv:1312.6114](https://arxiv.org/abs/1312.6114))
+*   Kingma, D. P., Salimans, T., Jozefowicz, R., Chen, X., Sutskever, I., & Welling, M. (2016). Improving Variational Inference with Inverse Autoregressive Flow. *Advances in Neural Information Processing Systems 29 (NIPS 2016)*. ([arXiv:1606.04934](https://arxiv.org/abs/1606.04934))
+*   Van den Oord, A., Kalchbrenner, N., & Kavukcuoglu, K. (2016). Pixel Recurrent Neural Networks. *Proceedings of the 33rd International Conference on Machine Learning (ICML 2016)*. ([arXiv:1601.06759](https://arxiv.org/abs/1601.06759))
+*   Hinton, G. E., & van Camp, D. (1993). Keeping the neural networks simple by minimizing the description length of the weights. *COLT 1993*.
+*   Frey, B. J., & Hinton, G. E. (1997). Variational learning in nonlinear Gaussian belief networks. *Neural Computation*.
+
+-----
