@@ -504,10 +504,10 @@ The paper also presents ablation studies (Table 1 in Appendix D) showing that mo
 ```
 
 > [!NOTE]
-> (Note: The NLL values are based on the paper's tables.
-> "AF VAE" in Table 1 seems to refer to a VAE with an IAF prior and a simpler decoder,
-> while "VLAE" implies an IAF prior and an autoregressive decoder like PixelCNN).
-> The paper states, "VLAE is able to perform well on the set of datasets,
+> (The NLL values are based on the paper's tables.<br/>
+> "AF VAE" in Table 1 seems to refer to a VAE with an IAF prior and a simpler decoder,<br/>
+> while "VLAE" implies an IAF prior and an autoregressive decoder like PixelCNN).<br/>
+> The paper states, "VLAE is able to perform well on the set of datasets,<br/>
 > significantly exceeding previous state-of-the-art results on dynamically binarized MNIST and Caltech-101 Silhouettes".
 
 ---
