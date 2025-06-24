@@ -25,8 +25,10 @@ source: https://arxiv.org/abs/1611.02731
 
 </div>
 
+---
 
-# CHANGE_ME
+
+# Variational Lossy Autoencoder
 <details open>
 <summary>Click to show/hide the full disclaimer.</summary>
    
@@ -48,7 +50,7 @@ This paper introduces the **Variational Lossy Autoencoder (VLAE)**, a generative
 
 ## 📜 Table of Contents
 
-- [CHANGE\_ME](#change_me)
+- [Variational Lossy Autoencoder](#variational-lossy-autoencoder)
   - [📜 Table of Contents](#-table-of-contents)
   - [1. Introduction \& Motivation](#1-introduction--motivation)
   - [2. Background: Variational Autoencoders (VAEs)](#2-background-variational-autoencoders-vaes)
