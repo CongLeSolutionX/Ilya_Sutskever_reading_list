@@ -48,17 +48,19 @@ This paper introduces the **Variational Lossy Autoencoder (VLAE)**, a generative
 
 ## 📜 Table of Contents
 
-1.  [Introduction & Motivation](#1-introduction--motivation)
-2.  [Background: Variational Autoencoders (VAEs)](#2-background-variational-autoencoders-vaes)
-	*   [The "VAEs Don't Autoencode" Argument](#the-vaes-dont-autoencode-argument)
-3.  [Bits-Back Coding: A Theoretical Lens 👓](#3-bits-back-coding-a-theoretical-lens-)
-4.  [The Variational Lossy Autoencoder (VLAE) Architecture 🏗️](#4-the-variational-lossy-autoencoder-vlae-architecture-️)
-	*   [Lossy Code via Information Preference](#lossy-code-via-information-preference)
-	*   [Learned Prior with Inverse Autoregressive Flow (IAF)](#learned-prior-with-inverse-autoregressive-flow-iaf)
-5.  [Key Mathematical Formulations 📐](#5-key-mathematical-formulations-)
-6.  [Experiments and Results 📊](#6-experiments-and-results-)
-7.  [Conclusion and Future Work 🚀](#7-conclusion-and-future-work-)
-8.  [References](#8-references)
+- [CHANGE\_ME](#change_me)
+  - [📜 Table of Contents](#-table-of-contents)
+  - [1. Introduction \& Motivation](#1-introduction--motivation)
+  - [2. Background: Variational Autoencoders (VAEs)](#2-background-variational-autoencoders-vaes)
+    - [The "VAEs Don't Autoencode" Argument](#the-vaes-dont-autoencode-argument)
+  - [3. Bits-Back Coding: A Theoretical Lens 👓](#3-bits-back-coding-a-theoretical-lens-)
+  - [4. The Variational Lossy Autoencoder (VLAE) Architecture 🏗️](#4-the-variational-lossy-autoencoder-vlae-architecture-️)
+    - [Lossy Code via Information Preference](#lossy-code-via-information-preference)
+    - [Learned Prior with Inverse Autoregressive Flow (IAF)](#learned-prior-with-inverse-autoregressive-flow-iaf)
+  - [5. Key Mathematical Formulations 📐](#5-key-mathematical-formulations-)
+  - [6. Experiments and Results 📊](#6-experiments-and-results-)
+  - [7. Conclusion and Future Work 🚀](#7-conclusion-and-future-work-)
+  - [8. References](#8-references)
 
 ---
 
@@ -127,6 +129,7 @@ config:
 }%%
 flowchart TD
     subgraph VAE_Model["VAE Model"]
+    style VAE_Model fill:#F2F2,stroke:#333,stroke-width:1px, color: #FFFF
         X["Input Data x"] --> Enc["Encoder<br/>q(z|x)"]
         Enc --> Z_dist["Latent Distribution<br/> μ(x), σ(x)"]
         Z_dist -- Sample --> Z["Latent Vector<br/> z"]
@@ -135,6 +138,7 @@ flowchart TD
     end
 
     subgraph Training_Objective["Training Objective<br/>(ELBO)"]
+    style Training_Objective fill:#22F2,stroke:#333,stroke-width:1px, color: #FFFF
     direction LR
         ELBO["Maximize ELBO"]
         ELBO --> ReconTerm["Reconstruction Term <br> log p(x|z)"]
@@ -144,7 +148,7 @@ flowchart TD
     style Enc fill:#f9f2,stroke:#333,stroke-width:2px
     style Dec fill:#9cf2,stroke:#333,stroke-width:2px
     style Z fill:#ccf2,stroke:#333,stroke-width:2px
-    style ELBO fill:#FFD700,stroke:#333,stroke-width:2px
+    style ELBO fill:#FD22,stroke:#333,stroke-width:2px
 ```
 
 ### The "VAEs Don't Autoencode" Argument
@@ -224,14 +228,17 @@ sequenceDiagram
     Sender->>Receiver: Information about data x
     Note over Sender,Receiver: Goal:<br/>Transmit x efficiently
 
-    alt Two-Part Code <br/>(Naive)
+    rect rgb(200, 15, 255, 0.1)
+      alt Two-Part Code <br/>(Naive)
         Sender-->>Z: Sample z ~ q(z|x)
         Sender->>Receiver: Transmit z <br/>(Cost: -log q(z|x))
         Sender->>Receiver: Transmit x given z <br/>(Cost: -log p(x|z))
         Note right of Receiver: Total Cost (Naive):<br/> E_q[-log q(z|x) - log p(x|z)]
+      end
     end
 
-    alt Bits-Back Coding
+    rect rgb(200, 15, 255, 0.3)
+      alt Bits-Back Coding
         Sender-->>Z_BB: Sample z ~ q(z|x) <br/>(Sender knows x)
         Note over Sender: Receiver only knows p(z) initially
         Sender->>Receiver: Transmit z <br/>(Cost: -log q(z|x))
@@ -239,6 +246,7 @@ sequenceDiagram
         Sender->>Receiver: Transmit x given z <br/>(Cost: -log p(x|z))
         Note over Receiver: Savings:<br/>Receiver can "recover" log p(z) bits <br/> because z provided more info than expected from p(z) alone.
         Note right of Receiver: Total Expected Cost:<br/> E_q[-log p(x|z)] + D_KL(q(z|x) || p(z)) <br/> = -ELBO
+      end
     end
 ```
 
@@ -289,11 +297,13 @@ config:
 }%%
 flowchart TD
     subgraph VLAE_Model["VLAE Model"]
+    style VLAE_Model fill:#F2F2,stroke:#333,stroke-width:1px, color: #FFFF
         X["Input Data x"] --> Enc["Encoder q(z|x)"]
         Enc --> Z_dist["Latent Distribution μ(x), σ(x)"]
         Z_dist -- Sample --> Z_raw["Raw Latent ε ~ N(0,I)"]
 
-        subgraph IAF_Posterior["Optional:<br/>IAF for Posterior q(z|x)"]
+        subgraph IAF_Posterior["Optional<br/>IAF for Posterior q(z|x)"]
+        style IAF_Posterior fill:#2F22,stroke:#333,stroke-width:1px, color: #FFFF
             Z_raw --> IAF_q["IAF Transform f_q"]
             IAF_q --> Z_q["Latent z_q = f_q(ε; x)"]
         end
@@ -302,6 +312,7 @@ flowchart TD
         AR_Dec --> X_recon["Reconstructed Data x'"]
 
         subgraph IAF_Prior["IAF for Prior p(z_p)"]
+        style IAF_Prior fill:#2AB2,stroke:#333,stroke-width:1px, color: #FFFF
              Z_prior_sample["Noise ε' ~ N(0,I)"] --> IAF_p["IAF Transform f_p"]
              IAF_p --> Z_p["Latent z_p = f_p(ε')"]
         end
@@ -312,12 +323,12 @@ flowchart TD
         Z_p -.-> KLDiv
     end
 
-    style Enc fill:#f9f,stroke:#333,stroke-width:2px
-    style AR_Dec fill:#9cf,stroke:#333,stroke-width:2px
-    style Z_q fill:#ccf,stroke:#333,stroke-width:2px
-    style Z_p fill:#ddf,stroke:#333,stroke-width:2px
-    style IAF_q fill:#B0E0E6,stroke:#333,stroke-width:1px
-    style IAF_p fill:#B0E0E6,stroke:#333,stroke-width:1px
+    style Enc fill:#f9f2,stroke:#333,stroke-width:2px
+    style AR_Dec fill:#9cf2,stroke:#333,stroke-width:2px
+    style Z_q fill:#ccf2,stroke:#333,stroke-width:2px
+    style Z_p fill:#ddf2,stroke:#333,stroke-width:2px
+    style IAF_q fill:#BEA6,stroke:#333,stroke-width:1px
+    style IAF_p fill:#BEA6,stroke:#333,stroke-width:1px
 ```
 
 *Note: The paper discusses IAF mainly for the prior $p(z)$, but also mentions that an "IAF posterior is the same as IAF prior along the encoder path $f^{-1}(q(z|x))$", meaning $q(z|x)$ is also modeled by transforming a simple noise distribution.*
@@ -389,8 +400,9 @@ config:
   }
 }%%
 flowchart TD
-    subgraph IAF Transformation
-        Epsilon["Input Noise ε ~ N(0,I)"] --> AutoregressiveNN["Autoregressive Neural Net (e.g., MADE) <br> z_i = f_i(ε_i; ε_{<i}, h)"]
+    subgraph IAF_Transformation["IAF Transformation"]
+    style IAF_Transformation fill:#F2F2,stroke:#333,stroke-width:1px, color: #FFFF
+        Epsilon["Input Noise ε ~ N(0,I)"] --> AutoregressiveNN["Autoregressive Neural Net<br/>(e.g., MADE) <br/> z_i = f_i(ε_i; ε_{<i}, h)"]
         AutoregressiveNN --> Z_transformed["Transformed Latent Variable z"]
         AutoregressiveNN --> Jacobian["Jacobian: Product of diagonal elements <br> log |det(dz/dε)| = Σ log |∂z_i/∂ε_i|"]
         LogP_z["log p(z) = log u(ε) - log |det(dz/dε)|"]
@@ -398,9 +410,9 @@ flowchart TD
         Jacobian --> LogP_z
     end
 
-    style Epsilon fill:#ACE1AF,stroke:#333,stroke-width:2px
-    style Z_transformed fill:#F4C2C2,stroke:#333,stroke-width:2px
-    style AutoregressiveNN fill:#ADD8E6,stroke:#333,stroke-width:2px
+    style Epsilon fill:#A1AF,stroke:#333,stroke-width:2px
+    style Z_transformed fill:#F2C2,stroke:#333,stroke-width:2px
+    style AutoregressiveNN fill:#D8E6,stroke:#333,stroke-width:2px
 ```
 
 ---
@@ -468,6 +480,7 @@ The paper evaluates VLAE on several tasks and datasets:
 The paper also presents ablation studies (Table 1 in Appendix D) showing that modification to the PixelCNN decoder + Gaussian Prior further improves with AF prior.
 
 **Table 1: Statically Binarized MNIST (NLL Test - Lower is Better)**
+
 ```markdown
 | Model                | NLL Test |
 |----------------------|----------|
@@ -490,8 +503,12 @@ The paper also presents ablation studies (Table 1 in Appendix D) showing that mo
 | **DenseNet VLAE (ours)**| **2.95** |
 ```
 
->[!NOTE]
-> (Note: The NLL values are based on the paper's tables. "AF VAE" in Table 1 seems to refer to a VAE with an IAF prior and a simpler decoder, while "VLAE" implies an IAF prior and an autoregressive decoder like PixelCNN).* The paper states, "VLAE is able to perform well on the set of datasets, significantly exceeding previous state-of-the-art results on dynamically binarized MNIST and Caltech-101 Silhouettes".
+> [!NOTE]
+> (Note: The NLL values are based on the paper's tables.
+> "AF VAE" in Table 1 seems to refer to a VAE with an IAF prior and a simpler decoder,
+> while "VLAE" implies an IAF prior and an autoregressive decoder like PixelCNN).
+> The paper states, "VLAE is able to perform well on the set of datasets,
+> significantly exceeding previous state-of-the-art results on dynamically binarized MNIST and Caltech-101 Silhouettes".
 
 ---
 
