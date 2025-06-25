@@ -174,7 +174,7 @@ config:
     }
   }
 }%%
-flowchart TD
+flowchart LR
     subgraph Seq2Seq_Model["Sequence-to-Sequence"]
     style Seq2Seq_Model fill:#F2F2,stroke:#00796b,stroke-width:2px, color: #FFFF
     direction LR
@@ -200,7 +200,7 @@ flowchart TD
         P_AttMech --> P_Softmax["Softmax over Inputs"]
         P_Softmax --> P_OutputIdx["Output Index Ci<br/> (Pointer to Pj)"]
     end
-    
+
     %% Connections showing flow
     %% Note: For Ptr-Net, the decoder state also influences subsequent steps, and encoder states are used at each step.
     %% This is simplified for comparison focus.
