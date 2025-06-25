@@ -176,6 +176,7 @@ config:
 }%%
 flowchart TD
     subgraph Seq2Seq_Model["Sequence-to-Sequence"]
+    style Seq2Seq_Model fill:#F2F2,stroke:#00796b,stroke-width:2px, color: #FFFF
     direction LR
         S_Input["Input Sequence P"] --> S_Encoder["Encoder RNN"]
         S_Encoder --> S_Code["Fixed Code Vector"]
@@ -185,23 +186,21 @@ flowchart TD
     end
 
     subgraph PtrNet_Model["Pointer Network"]
+    style PtrNet_Model fill:#22F2,stroke:#1565c0,stroke-width:2px, color: #FFFF
     direction LR
         P_Input["Input Sequence P"] --> P_Encoder["Encoder RNN"]
         P_Encoder --> P_EncoderStates["Encoder States e1..en"]
         P_Decoder["Decoder RNN"] --> P_DecoderState_di["Decoder State di"]
         
         subgraph AttentionAsPointer["Attention as Pointer"]
+        style AttentionAsPointer fill:#2F22,stroke:#f57f17,stroke-width:1px,stroke-dasharray: 5 5, color: #FFFF
             P_EncoderStates --> P_AttMech[Content-Based Attention u_j^i]
             P_DecoderState_di --> P_AttMech
         end
         P_AttMech --> P_Softmax["Softmax over Inputs"]
         P_Softmax --> P_OutputIdx["Output Index Ci<br/> (Pointer to Pj)"]
     end
-
-    style Seq2Seq_Model fill:#e6fffa,stroke:#00796b,stroke-width:2px
-    style PtrNet_Model fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    style AttentionAsPointer fill:#fff9c4,stroke:#f57f17,stroke-width:1px,stroke-dasharray: 5 5
-
+    
     %% Connections showing flow
     %% Note: For Ptr-Net, the decoder state also influences subsequent steps, and encoder states are used at each step.
     %% This is simplified for comparison focus.
@@ -248,6 +247,8 @@ EncoderStates ..> AttentionComputation : Provides content
 ```
 
 This shows that for each potential input element $P_j$ (represented by its encoder state $e_j$), a score $u_j^i$ is computed based on $e_j$ and the current decoder state $d_i$. The collection of these scores $u^i = (u_1^i, \dots, u_n^i)$ is then passed through a softmax layer to produce a probability distribution *over the n input positions*.
+
+----
 
 ## Tackling Combinatorial Problems 🧩
 
@@ -313,13 +314,16 @@ flowchart LR
     style TSP fill:#BFB2,stroke:#333,stroke-width:2px
 ```
 
-*Note: `⇒` and `⇐` represent special start/end of sequence tokens.*
+> [!NOTE]
+> `⇒` and `⇐` represent special start/end of sequence tokens.*
 
 ### Training Data Specifics
 
 *   **Convex Hull:** Output sequence starts from the point with the lowest index and goes counter-clockwise.
 *   **Delaunay Triangulation:** Triangles $C_i$ are ordered by their incenter coordinates (lexicographically), and vertices within a triangle are ordered by increasing index. This ordering helps reduce ambiguity during training.
 *   **TSP:** For optimal solutions (small $n$), Held-Karp algorithm ($O(2^n n^2)$) was used. For larger $n$, approximate algorithms were used for training data. Tours start at the first city.
+
+----
 
 ## Empirical Results 📊
 
@@ -350,6 +354,8 @@ Ptr-Nets showed impressive performance:
 	*   $n=50$: Ptr-Net 7.66 (vs. A3 approx 5.79) - Breaks down further.
 	The paper notes that TSP is of far greater complexity than $O(n \log n)$ (like convex hull), which might explain the more limited generalization range on TSP.
 *   Interestingly, when a Ptr-Net was trained on data from a suboptimal algorithm (A1), it **outperformed** the algorithm it was trying to imitate for $n=50$.
+
+---
 
 ## Conclusions and Future Work 🤔🚀
 
