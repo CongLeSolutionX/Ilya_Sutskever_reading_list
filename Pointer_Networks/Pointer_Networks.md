@@ -11,7 +11,7 @@ source: https://arxiv.org/pdf/1506.03134
   <p>⚠️🏗️🚧🦺🧱🪵🪨🪚🛠️👷</p>
   <i>This is a working draft in progress.</i>
   <br/>
-  <img alt="Loading…" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2ZvdmpseXN2czY0ZDJvNG9pbzd2aHQzcHVhazA3OWNpMG5obnZtNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PgLBnzDESG1M4cRTsj/giphy.gif"/>
+  <img alt="Loading…" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGhzZmZhMjQ4OGI2NWg3ejhucXp6aXZhYWlvNHQyNXN5cGQ2ZHRhMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kEvQXdwhbcMPS/giphy.gif"/>
   <br/>
   <blockquote>
 	  <!-- <em>The scene is from the series <b>Mr. Robot</b>
