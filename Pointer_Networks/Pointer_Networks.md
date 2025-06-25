@@ -11,7 +11,7 @@ source: https://arxiv.org/pdf/1506.03134
   <p>⚠️🏗️🚧🦺🧱🪵🪨🪚🛠️👷</p>
   <i>This is a working draft in progress.</i>
   <br/>
-  <img alt="Loading…" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2ZvdmpseXN2czY0ZDJvNG9pbzd2aHQzcHVhazA3OWNpMG5obnZtNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PgLBnzDESG1M4cRTsj/giphy.gif"/>
+  <img alt="Loading…" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGhzZmZhMjQ4OGI2NWg3ejhucXp6aXZhYWlvNHQyNXN5cGQ2ZHRhMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kEvQXdwhbcMPS/giphy.gif"/>
   <br/>
   <blockquote>
 	  <!-- <em>The scene is from the series <b>Mr. Robot</b>
@@ -174,7 +174,7 @@ config:
     }
   }
 }%%
-flowchart TD
+flowchart LR
     subgraph Seq2Seq_Model["Sequence-to-Sequence"]
     style Seq2Seq_Model fill:#F2F2,stroke:#00796b,stroke-width:2px, color: #FFFF
     direction LR
@@ -200,7 +200,7 @@ flowchart TD
         P_AttMech --> P_Softmax["Softmax over Inputs"]
         P_Softmax --> P_OutputIdx["Output Index Ci<br/> (Pointer to Pj)"]
     end
-    
+
     %% Connections showing flow
     %% Note: For Ptr-Net, the decoder state also influences subsequent steps, and encoder states are used at each step.
     %% This is simplified for comparison focus.
@@ -288,19 +288,23 @@ config:
 }%%
 flowchart LR
     subgraph ProblemDomains["Ptr-Net Applications"]
+    style ProblemDomains fill:#F2F2,stroke:#333,stroke-width:1px, color: #FFFF
         InputPoints["Input:<br/>Planar Point Set P<br/>{P1, ..., Pn}"]
 
         subgraph ConvexHull["Convex Hull"]
+        style ConvexHull fill:#2B2B,stroke:#333,stroke-width:2px, color: #FFFF
             CH_Input["P"] --> CH_Process["Find Extreme Points"]
             CH_Process --> CH_Output["Output CP:<br/>Sequence of indices forming the hull<br/> e.g., {⇒, 2, 4, 3, 5, ⇐}"]
         end
 
         subgraph Delaunay["Delaunay Triangulation"]
+        style Delaunay fill:#22BB,stroke:#333,stroke-width:2px, color: #FFFF
             D_Input["P"] --> D_Process["Form Triangles"]
             D_Process --> D_Output["Output CP:<br/>Sequence of triangle vertex index triples<br/> e.g., {⇒, (1,2,4), (1,4,5), ... ⇐}"]
         end
 
         subgraph TSP["Travelling Salesman Problem"]
+        style TSP fill:#BFB2,stroke:#333,stroke-width:2px, color: #FFFF
             TSP_Input["P<br/>(Cities)"] --> TSP_Process["Find Shortest Tour"]
             TSP_Process --> TSP_Output["Output CP:<br/>Permutation of indices (tour)<br/> e.g., {⇒, 1, 3, 2, 4, 1, ⇐}"]
         end
@@ -308,10 +312,7 @@ flowchart LR
         InputPoints --> Delaunay
         InputPoints --> TSP
     end
-
-    style ConvexHull fill:#2B2B,stroke:#333,stroke-width:2px
-    style Delaunay fill:#22BB,stroke:#333,stroke-width:2px
-    style TSP fill:#BFB2,stroke:#333,stroke-width:2px
+    
 ```
 
 > [!NOTE]
