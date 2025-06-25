@@ -288,19 +288,23 @@ config:
 }%%
 flowchart LR
     subgraph ProblemDomains["Ptr-Net Applications"]
+    style ProblemDomains fill:#F2F2,stroke:#333,stroke-width:1px, color: #FFFF
         InputPoints["Input:<br/>Planar Point Set P<br/>{P1, ..., Pn}"]
 
         subgraph ConvexHull["Convex Hull"]
+        style ConvexHull fill:#2B2B,stroke:#333,stroke-width:2px, color: #FFFF
             CH_Input["P"] --> CH_Process["Find Extreme Points"]
             CH_Process --> CH_Output["Output CP:<br/>Sequence of indices forming the hull<br/> e.g., {⇒, 2, 4, 3, 5, ⇐}"]
         end
 
         subgraph Delaunay["Delaunay Triangulation"]
+        style Delaunay fill:#22BB,stroke:#333,stroke-width:2px, color: #FFFF
             D_Input["P"] --> D_Process["Form Triangles"]
             D_Process --> D_Output["Output CP:<br/>Sequence of triangle vertex index triples<br/> e.g., {⇒, (1,2,4), (1,4,5), ... ⇐}"]
         end
 
         subgraph TSP["Travelling Salesman Problem"]
+        style TSP fill:#BFB2,stroke:#333,stroke-width:2px, color: #FFFF
             TSP_Input["P<br/>(Cities)"] --> TSP_Process["Find Shortest Tour"]
             TSP_Process --> TSP_Output["Output CP:<br/>Permutation of indices (tour)<br/> e.g., {⇒, 1, 3, 2, 4, 1, ⇐}"]
         end
@@ -308,10 +312,7 @@ flowchart LR
         InputPoints --> Delaunay
         InputPoints --> TSP
     end
-
-    style ConvexHull fill:#2B2B,stroke:#333,stroke-width:2px
-    style Delaunay fill:#22BB,stroke:#333,stroke-width:2px
-    style TSP fill:#BFB2,stroke:#333,stroke-width:2px
+    
 ```
 
 > [!NOTE]
