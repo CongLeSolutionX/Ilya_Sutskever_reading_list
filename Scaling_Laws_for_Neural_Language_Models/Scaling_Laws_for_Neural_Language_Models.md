@@ -283,7 +283,7 @@ digraph BasicPowerLaws {
 
 ```mermaid
 ---
-title: "CHANGE_ME_DADDY"
+title: "🆚 LSTMs vs. Transformers Comparison (Section 3.2.1)"
 author: "Cong Le"
 version: "1.0"
 license(s): "MIT, CC BY-SA 4.0"
@@ -314,23 +314,25 @@ config:
   }
 }%%
 flowchart LR
-    subgraph "LSTM vs. Transformer Performance Comparison 🥊"
-        A["Model Parameters (N, non-embedding)"] --> B_LSTM["LSTM Performance"];
-        A --> C_Transformer["Transformer Performance"];
+    subgraph LSTM_vs_Transformer_Performance_Comparison["LSTM vs. Transformer Performance Comparison 🥊"]
+    style LSTM_vs_Transformer_Performance_Comparison fill:#F2F2,stroke:#333,stroke-width:1px, color: #FFFF
+        A["Model Parameters (N, non-embedding)"] --> B_LSTM["LSTM Performance"]
+        A --> C_Transformer["Transformer Performance"]
 
-        B_LSTM --> D["Performance plateaus for tokens later in context 📉"];
-        D --> D_math["$$L_{LSTM}(\text{token}_i) \text{ saturates for large } i$$ <br> (Limited by sequential processing of context)"];
+        B_LSTM --> D["Performance plateaus for tokens later in context 📉"]
+        D --> D_math["$$L_{LSTM}(\text{token}_i) \text{ saturates for large } i$$ <br> (Limited by sequential processing of context)"]
         
-        C_Transformer --> E["Continues to improve for tokens throughout long contexts (e.g., 1024 tokens) ✨"];
-        E --> E_math["$$L_{Transformer}(\text{token}_i) \text{ improves even for large } i$$ <br> (Benefits from attention mechanism over full context)"];
+        C_Transformer --> E["Continues to improve for tokens throughout long contexts (e.g., 1024 tokens) ✨"]
+        E --> E_math["$$L_{Transformer}(\text{token}_i) \text{ improves even for large } i$$ <br> (Benefits from attention mechanism over full context)"]
         
-        F["Overall Result 🏆"] --> G["Transformers asymptotically outperform LSTMs, especially due to superior utilization of long-range context information."];
-        B_LSTM -.-> F;
-        C_Transformer --> F;
+        F["Overall Result 🏆"] --> G["Transformers asymptotically outperform LSTMs, especially due to superior utilization of long-range context information."]
+        B_LSTM -.-> F
+        C_Transformer --> F
     end
-    style D_math fill:#fdf, stroke:#333, stroke-width:2px
-    style E_math fill:#fdf, stroke:#333, stroke-width:2px
-    style G fill:#lightgreen, stroke:#333, stroke-width:2px
+
+    style D_math fill:#fdf2, stroke:#333, stroke-width:2px
+    style E_math fill:#fdf2, stroke:#333, stroke-width:2px
+    style G fill:#2B12, stroke:#333, stroke-width:2px
 ```
 
 ----
@@ -430,6 +432,7 @@ config:
 }%%
 flowchart TD
     subgraph Critical_Batch_Size_and_Training_Step_Compute_Adjustments["Critical Batch Size & Training Step/Compute Adjustments 🛠️"]
+    style Critical_Batch_Size_and_Training_Step_Compute_Adjustments fill:#F2F2,stroke:#333,stroke-width:1px, color: #FFFF
         A["Achieved Loss<br/>(L)"] --"Determines<br/> (MKAT18)"--> B["Critical Batch Size:<br/> B_crit(L)"]
         B --> B_formula["$$ B_{crit}(L) \\approx \\frac{B^*}{L^{1/\\alpha_B}} $$ <br> B* ≈ 2 × 10<sup>8</sup> tokens, α<sub>B</sub> ≈ 0.21 <br> Independent of N, depends only on current L."]
         B_formula --> B_note["B_crit(L) is the batch size for optimal time/compute tradeoff."]
@@ -447,6 +450,7 @@ flowchart TD
         D --"Used in"--> H["L(N, S_min) analysis"]
         F --"Used in"--> I["L(C_min) analysis for optimal allocation"]
     end
+
     style B_formula fill:#f9f3, stroke:#333, stroke-width:2px
     style D_formula fill:#f9f3, stroke:#333, stroke-width:2px
     style F_formula fill:#f9f3, stroke:#333, stroke-width:2px
@@ -519,7 +523,7 @@ Given a fixed compute budget $C_{min}$, this section details how to optimally al
 
 ```mermaid
 ---
-title: "CHANGE_ME_DADDY"
+title: "🎯 Optimal Allocation of Compute Budget (Section 6 & Appendix B)"
 author: "Cong Le"
 version: "1.0"
 license(s): "MIT, CC BY-SA 4.0"
@@ -592,20 +596,20 @@ flowchart TD
     M -.-> M4
 
 
-    style H_eq fill:#e6ffe6, stroke:#333, stroke-width:2px
-    style I_eq fill:#e6ffe6, stroke:#333, stroke-width:2px
-    style J_eq fill:#e6ffe6, stroke:#333, stroke-width:2px
-    style K_eq fill:#e6ffe6, stroke:#333, stroke-width:2px
-    style H_alpha fill:#e6ffe6, stroke:#333, stroke-width:2px
-    style E_eq fill:#fff0e6, stroke:#333, stroke-width:1px
-    style D_eq1 fill:#fff0e6, stroke:#333, stroke-width:1px
-    style D_eq2 fill:#fff0e6, stroke:#333, stroke-width:1px
-    style C fill:#ff2e6, stroke:#333, stroke-width:1px
+    style H_eq fill:#ef22, stroke:#333, stroke-width:2px
+    style I_eq fill:#ef22, stroke:#333, stroke-width:2px
+    style J_eq fill:#ef22, stroke:#333, stroke-width:2px
+    style K_eq fill:#ef22, stroke:#333, stroke-width:2px
+    style H_alpha fill:#ef22, stroke:#333, stroke-width:2px
+    style E_eq fill:#f2e2, stroke:#333, stroke-width:1px
+    style D_eq1 fill:#f2e2, stroke:#333, stroke-width:1px
+    style D_eq2 fill:#f2e2, stroke:#333, stroke-width:1px
+    style C fill:#A2FF, stroke:#333, stroke-width:1px
     style M fill:#22BB, stroke:#333, stroke-width:2px
-    style M1 fill:#2B2B, stroke:#333
-    style M2 fill:#2B2B, stroke:#333
-    style M3 fill:#2B2B, stroke:#333
-    style M4 fill:#2B2B, stroke:#333
+    style M1 fill:#2B22, stroke:#333
+    style M2 fill:#2B22, stroke:#333
+    style M3 fill:#2B22, stroke:#333
+    style M4 fill:#2B22, stroke:#333
 ```
 
 **Optimal Allocation exponents from paper (Eq 1.7 & surrounding text):**
