@@ -1,9 +1,9 @@
 ---
-created: 2025-06-24 05:31:26
+created: 2025-06-28 05:31:26
 author: Cong Le
 version: "1.0"
 license(s): MIT, CC BY-SA 4.0
-copyright: Copyright (c) 2025 Cong Le. All Rights Reserved.
+copyright: Copyright © 2025 Cong Le. All Rights Reserved.
 ---
 
 <div align="center">
